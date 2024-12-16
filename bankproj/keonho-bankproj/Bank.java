@@ -1,12 +1,12 @@
 package backendproject;
 
-import day09.BankException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -22,21 +22,25 @@ public class Bank {
         return customers;
     }
 
-    public void addCustomer(Customer customer) throws BankException {
+    public void addCustomer(Customer customer) throws BankOperationException {
         if (customers.size() == MAX_SIZE) {
-            throw new BankException("최대 고객 제한을 초과했습니다.");
+            throw new BankOperationException("최대 고객 제한을 초과했습니다.");
         }
 
         customers.add(customer);
     }
 
-    public Customer findCustomer(int i) {
+    public Customer findCustomer(int i) throws BankOperationException {
+        Customer returnCustomer = null;
+
         for (Customer customer : customers) {
             if (customer.getId() == i) {
-                return customer;
+                returnCustomer = customer;
+                return returnCustomer;
             }
         }
-        return null;
+
+        throw new BankOperationException("없는 고객입니다.");
     }
 
     public boolean isIn(int id) {
@@ -48,32 +52,38 @@ public class Bank {
         return false;
     }
 
-    public void saveCustomer(){
+    public void saveCustomer(String name, int id){
         try {
-            System.out.println("고객 등록을 선택하셨습니다.");
-            System.out.print("고객의 이름을 입력하세요 : ");
-            Scanner scanner = new Scanner(System.in);
-            String name = scanner.next();
-            System.out.print("고객의 id를 입력해주세요 : ");
-            int id = scanner.nextInt();
+
+            // 중복 체크
             if(isIn(id)){
-                throw new BankException("이미 존재하는 ID입니다. (다른 아이디를 입력해주세요.)");
+                throw new BankOperationException("이미 존재하는 ID입니다. (다른 아이디를 입력해주세요.)");
             }
+
+            // 고객 생성
             Customer customer = Customer.builder()
                     .name(name)
                     .id(id)
                     .build();
 
+            // 고객 목록에 추가
             addCustomer(customer);
 
-            System.out.println("-------- 현재 고객 정보 --------");
-            for (Customer c : getCustomers()) {
-                System.out.println(c.getName());
-            }
-            System.out.println("------------------------------");
-        }catch (BankException e) {
+            // 목록 출력
+            showCustomersDiplay();
+
+        }catch (BankOperationException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    // 고객 목록 출력 Display
+    private void showCustomersDiplay() {
+        System.out.println("-------- 현재 고객 정보 --------");
+        for (Customer c : getCustomers()) {
+            System.out.println(c.getName());
+        }
+        System.out.println("------------------------------");
     }
 
 
