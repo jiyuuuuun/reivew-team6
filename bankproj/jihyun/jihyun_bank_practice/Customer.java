@@ -72,6 +72,9 @@ public class Customer {
             throw new BankOperationException("최대 계좌를 초과했습니다. 더 이상 계좌를 생성할 수 없습니다.");
         }
     }
+    public Account[] getAccounts(){
+        return accountList;
+    }
 
 
     public String getCustomerId() {

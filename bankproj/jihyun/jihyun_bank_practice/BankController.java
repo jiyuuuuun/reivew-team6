@@ -19,30 +19,29 @@ public class BankController {
     private final int BANK_CUSTOMER_SIZE =10;
 
     public void mainBankLogic() {
-            Bank bank = new Bank(BANK_CUSTOMER_SIZE);
-            Scanner scan = new Scanner(System.in);
+        Bank bank = new Bank(BANK_CUSTOMER_SIZE);
+        Scanner scan = new Scanner(System.in);
+
+        printMessage();
+        while (true) {
+            int selectNumber = scan.nextInt();
+
+            if (selectNumber == MenuOption.EXIT.getOption()) {
+                MenuOption.EXIT.executeMenuOption(this, bank);
+                break;
+            }
+
+            try {
+                MenuOption menuOption = MenuOption.fromOption(selectNumber);
+                menuOption.executeMenuOption(this, bank);
+            } catch (BankOperationException e) {
+                System.out.println(e.getMessage());
+            }
 
             printMessage();
-
-            while (true) {
-                int selectNumber = scan.nextInt();
-                if (selectNumber == MenuOption.EXIT.getOption()) {
-                    MenuOption.EXIT.executeMenuOption(this, bank);
-                    break;
-                }
-
-                try {
-                    MenuOption menuOption = MenuOption.fromOption(selectNumber);
-                    menuOption.executeMenuOption(this, bank);
-                } catch (BankOperationException e) {
-                    System.out.println(e.getMessage());
-                }
-
-                printMessage();
-            }
         }
 
-
+    }
 
     public long viewRemainingMoney(Bank bank) {
         long remainMoney =-1;
@@ -52,6 +51,7 @@ public class BankController {
         }catch (BankOperationException | AccountNotFoundException e) {
             System.out.println(e.getMessage());
         }
+
         return remainMoney;
     }
 

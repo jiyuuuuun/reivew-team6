@@ -27,7 +27,7 @@ public class Bank {
         return validCustomer(customerId);
     }
 
-
+    //은행에 고객정보 저장
     private Customer addCustomerInformation(String customerId,String customerName){
         Customer customer = new Customer(customerId,customerName);
         for(int i=0;i<customersInformation.length;i++){
@@ -41,9 +41,7 @@ public class Bank {
     }
 
 
-
-
-    //고객을 추가할 자리가 있는지 확인한다.
+    //고객을 추가할 자리가 있는지 확인한다.(은행이 관리할 수 있는 인원 확인)
     private void validCustomerSize() throws BankOperationException{
 
         boolean hasSpace = false;
@@ -61,7 +59,7 @@ public class Bank {
 
 
     //만약 존재하지 않는 아이디라면 예외가 발생한다.
-    private Customer validCustomer(String customerId)throws BankOperationException{
+    private Customer validCustomer(String customerId) throws BankOperationException{
         for (Customer customer : customersInformation) {
             if (customer != null && customer.getCustomerId().equals(customerId)) {
                 return customer;
@@ -77,7 +75,11 @@ public class Bank {
         if(customerIdList.contains(customerId)){
             throw new BankOperationException("이미 존재하는 아이디 입니다. ");
         }
+    }
 
+    //고객이 가지고 있는 계좌 넘기기
+    public Account[] getCustomerAccounts(Customer customer) throws BankOperationException {
+        return customer.getAccountList();
     }
 
 }

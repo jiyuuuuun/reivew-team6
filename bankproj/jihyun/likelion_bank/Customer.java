@@ -9,16 +9,17 @@ public class Customer {
     private String customerName;
     private final int ACCOUNT_MAX_SIZE = 5;
 
+
     public Customer(String customerId, String customerName) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.accountList = new Account[ACCOUNT_MAX_SIZE]; //최대 계좌 생성 개수를 설정하낟.
     }
 
-    //계좌가 존재하는지 확인하고, 존재한다면 계좌를 return 해줍니다.
+    //계좌가 존재하는지 확인하고, 존재한다면 계좌를 return
     public Account getAccount(long accountNumber) throws AccountNotFoundException {
         try {
-            accountExists();
+            accountExists(); //account존재하는지
         } catch (AccountNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -31,7 +32,7 @@ public class Customer {
         throw new AccountNotFoundException();
 
     }
-
+    //입금 출금 전 계좌 생성 했는지 확인
     public void accountExists() throws AccountNotFoundException {
         boolean hasAccount = false;
         for (Account account : accountList) {
@@ -45,9 +46,10 @@ public class Customer {
         }
     }
 
+    //계좌 추가
     public void addAccount(Account account) {
         try {
-            validAccountLimit();
+            validAccountLimit(); //예외검사
 
         } catch (BankOperationException e) {
             System.out.println(e.getMessage());
@@ -61,6 +63,7 @@ public class Customer {
         }
     }
 
+    //최대 계좌를 초과했는지 검사
     public void validAccountLimit() throws BankOperationException {
         int accountNumber = 0;
         for (Account account : accountList) {
@@ -73,6 +76,9 @@ public class Customer {
         }
     }
 
+    public Account[] getAccountList() {
+        return accountList;
+    }
 
     public String getCustomerId() {
         return customerId;

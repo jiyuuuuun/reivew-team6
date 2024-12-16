@@ -68,7 +68,6 @@ public enum MenuOption {
     }
 
     public static MenuOption fromOption(int option)throws BankOperationException {
-
         for(MenuOption menuOption : values()){
             if(menuOption.getOption() == option){
                 return menuOption;

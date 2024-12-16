@@ -7,7 +7,6 @@ import BankProject.ExceptionClass.InvalidTransactionException;
 public class Account {
 
 
-
     //계좌번호
     private long accountNumber;
 
@@ -18,24 +17,26 @@ public class Account {
     private int ownId;
 
     public Account(long accountNumber, long balance, int ownId) {
-        this.accountNumber=accountNumber;
-        this.balance=balance;
-        this.ownId=ownId;
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.ownId = ownId;
     }
 
     //입금 메서드
-    public void deposit(long money)throws Exception{
-        if(money<=0)
+    public void deposit(long money) throws Exception {
+        if (money <= 0) {
             throw new InvalidTransactionException("입금 금액이 0원 입니다");
-        this.balance+=money;
+        }
+        this.balance += money;
 
     }
 
     //출금 메서드
-    public void withdraw(long money)throws Exception{
-        if(balance<=0||balance<money)
+    public void withdraw(long money) throws Exception {
+        if (balance <= 0 || balance < money) {
             throw new InvalidTransactionException("잔액 부족");
-        this.balance-=money;
+        }
+        this.balance -= money;
         System.out.println("출금 완료 되었습니다");
     }
 
@@ -51,15 +52,15 @@ public class Account {
         return balance;
     }
 
-    public  void setBalance(long balance) {
+    public void setBalance(long balance) {
         this.balance = balance;
     }
 
-    public  int getOwnId() {
+    public int getOwnId() {
         return this.ownId;
     }
 
-    public  void setOwnId(int ownId) {
+    public void setOwnId(int ownId) {
         this.ownId = ownId;
     }
 
