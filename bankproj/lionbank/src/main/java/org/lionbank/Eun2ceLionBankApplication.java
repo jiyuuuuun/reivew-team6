@@ -1,13 +1,13 @@
-package com.lionbank;
+package org.lionbank;
 
-import com.lionbank.core.Bank;
-import com.lionbank.db.DatabaseManager;
+import org.lionbank.core.Bank;
+import org.lionbank.db.DatabaseManager;
 import java.util.Scanner;
 
 public class Eun2ceLionBankApplication {
   public static void main(String[] args) {
     try {
-      DatabaseManager dbManager = new DatabaseManager("jdbc:mysql://localhost:3306/lionbank_db?useSSL=false&serverTimezone=UTC",
+      DatabaseManager dbManager = new DatabaseManager("jdbc:mysql://localhost:3306/lionbank_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
           "root", "root");
       Bank bank = new Bank(dbManager);
 

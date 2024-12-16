@@ -1,4 +1,4 @@
-package com.lionbank.core;
+package org.lionbank.core;
 
 public class Customer {
   private String id;

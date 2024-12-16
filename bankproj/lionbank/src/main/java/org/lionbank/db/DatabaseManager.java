@@ -1,5 +1,4 @@
-
-package com.lionbank.db;
+package org.lionbank.db;
 
 import java.sql.*;
 import javax.security.auth.login.AccountNotFoundException;
@@ -9,7 +8,7 @@ public class DatabaseManager {
 
   public DatabaseManager(String url, String user, String password)
       throws SQLException, ClassNotFoundException {
-    Class.forName("com.mysql.jdbc.Driver");
+//    Class.forName("com.mysql.jdbc.Driver");
     this.connection = DriverManager.getConnection(url, user, password);
   }
 

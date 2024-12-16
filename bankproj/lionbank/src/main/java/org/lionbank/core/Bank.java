@@ -1,6 +1,6 @@
-package com.lionbank.core;
+package org.lionbank.core;
 
-import com.lionbank.db.DatabaseManager;
+import org.lionbank.db.DatabaseManager;
 import com.lionbank.exception.BankOperationException;
 import com.lionbank.exception.InvalidTransactionException;
 import java.sql.SQLException;

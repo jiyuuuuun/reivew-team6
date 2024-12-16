@@ -1,0 +1,17 @@
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "lionbank_db"
+      MYSQL_USER: "lionbank"
+      MYSQL_PASSWORD: "lionbank"
+    ports:
+      - 3306:3306
+    volumes:
+      - ./database/datadir:/var/lib/mysql
+      - ./database/init/init.sql:/docker-entrypoint-initdb.d/init.sql
