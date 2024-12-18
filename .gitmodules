@@ -1,0 +1,3 @@
+[submodule "bankproj/lionbank-eun2ce"]
+	path = bankproj/lionbank-eun2ce
+	url = https://github.com/eun2ce/likelion.git
